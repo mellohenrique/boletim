@@ -1,0 +1,57 @@
+---
+title: "Interpretacao-casos-covid"
+author: "Henrique Santos"
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 99)
+
+library(codeplan.boletim)   
+library(tidyverse)
+
+classificacao = read.csv2("../produto/2021-01-01-classificao-mortal-letal.csv")
+
+classificacao = as.data.frame(classificacao[classificacao$estado != "BR",])
+```
+
+# Interpretação para o boletim
+
+Arquivo com as frases usadas no boletim.
+
+## Casos por estado e Distrito Federal
+
+Segundo dados do Ministério da Saúde do dia `r retira_valor(classificacao, "estado", "DF", "data")`, o Distrito Federal:
+
+* Ocupa a `r retira_valor(classificacao, "estado", "DF", "rank_casos")`ª posição entre as Unidades da Federação em número de casos confirmados de COVID-19, com `r retira_valor(classificacao, "estado", "DF", "casosAcumulado")` os estados com maior número de casos são `r retira_valor(classificacao, "rank_casos", "1", "estado")` (`r retira_valor(classificacao, "rank_casos", "1", "casosAcumulado")`), `r retira_valor(classificacao, "rank_casos", "2", "estado")` (`r retira_valor(classificacao, "rank_casos", "2", "casosAcumulado")`), `r retira_valor(classificacao, "rank_casos", "3", "estado")` (`r retira_valor(classificacao, "rank_casos", "3", "casosAcumulado")`), `r retira_valor(classificacao, "rank_casos", "4", "estado")` (`r retira_valor(classificacao, "rank_casos", "4", "casosAcumulado")`) e `r retira_valor(classificacao, "rank_casos", "5", "estado")` (`r retira_valor(classificacao, "rank_casos", "5", "casosAcumulado")`);
+
+* O DF se encontra na  `r retira_valor(classificacao, "estado", "DF", "rank_casos_novos")`ª posição em número de novos casos diários;
+
+* Ocupa a `r retira_valor(classificacao, "estado", "DF", "rank_casos_dens")`ª colocação em número de casos por 100 mil habitantes, com `r retira_valor(classificacao, "estado", "DF", "casos_100k")` casos por 100 mil habitantes, atrás apenas de `r retira_valor(classificacao, "rank_casos_dens", "1", "estado")` com `r retira_valor(classificacao, "rank_casos_dens", "1", "casos_100k")`;
+;
+
+* Está na `r retira_valor(classificacao, "estado", "DF", "rank_obitos")`ª posição em número de óbitos;
+
+* No coeficiente de mortalidade, se encontra na `r retira_valor(classificacao, "estado", "DF", "rank_mortalidade")`ª colocação, com `r retira_valor(classificacao, "estado", "DF", "mortalidade")` casos por 100 mil habitantes, atrás apenas de `r retira_valor(classificacao, "rank_mortalidade", "1", "estado")` com `r retira_valor(classificacao, "rank_mortalidade", "1", "mortalidade")`;
+
+* E ocupa a  `r retira_valor(classificacao, "estado", "DF", "rank_letalidade")`ª na taxa de letalidade.
+
+## Mortalidade
+
+* O coeficiente de mortalidade por COVID-19 é conceituado como o número de óbitos por doenças COVID-19, por 100 mil habitantes, na população residente em determinado espaço geográfico, no ano considerado;
+
+* O Distrito Federal apresentou `r retira_valor(classificacao, "estado", "DF", "mortalidade")` óbitos a cada 100 mil habitantes em `r retira_valor(classificacao, "estado", "DF", "data")`, ocupando a `r retira_valor(classificacao, "estado", "DF", "rank_mortalidade")`ª posição no ranking do coeficiente de mortalidade entre os estados;
+
+* A maior taxa de mortalidade está no `r retira_valor(classificacao, "rank_mortalidade", "1", "estado")` (`r retira_valor(classificacao, "rank_mortalidade", "1", "mortalidade")`/100 mil habitantes), seguida do `r retira_valor(classificacao, "rank_mortalidade", "2", "estado")` (`r retira_valor(classificacao, "rank_mortalidade", "2", "mortalidade")`) e do `r retira_valor(classificacao, "rank_mortalidade", "3", "estado")` (`r retira_valor(classificacao, "rank_mortalidade", "3", "mortalidade")`);
+
+* O menor coeficiente de mortalidade foi registrado no  `r retira_valor(classificacao, "rank_mortalidade", "27", "estado")` com `r retira_valor(classificacao, "rank_mortalidade", "27", "mortalidade")` óbitos a cada 100 mil habitantes.
+
+## Letalidade
+
+Já a taxa de letalidade dá a noção da gravidade da doença, correspondendo ao número de óbitos confirmados de COVID-19 em relação ao total de casos confirmados, na população residente em determinado espaço geográfico, no período considerado;
+
+* O Distrito Federal ocupou a `r retira_valor(classificacao, "estado", "DF", "rank_letalidade")` posição no ranking da taxa de letalidade entre os estados em `r retira_valor(classificacao, "estado", "DF", "data")`, com `r retira_valor(classificacao, "estado", "DF", "letalidade", TRUE)` dos casos confirmados vindo a óbito, apenas atrás de `r retira_valor(classificacao, "rank_letalidade", 24, "estado")` com uma taxa de `r retira_valor(classificacao, "rank_letalidade", "24", "letalidade", TRUE)`, `r retira_valor(classificacao, "rank_letalidade", 25, "estado")` com uma taxa de `r retira_valor(classificacao, "rank_letalidade", "25", "letalidade", TRUE)`, `r retira_valor(classificacao, "rank_letalidade", 26, "estado")` com uma taxa de `r retira_valor(classificacao, "rank_letalidade", "26", "letalidade", TRUE)` e `r retira_valor(classificacao, "rank_letalidade", 27, "estado")` com uma taxa de `r retira_valor(classificacao, "rank_letalidade", 27, "letalidade", TRUE)`.
+
+* A maior taxa de letalidade do COVID-19 do país foi registrada no `r retira_valor(classificacao, "rank_letalidade", 1, "estado")`, com `r retira_valor(classificacao, "rank_letalidade", 1, "letalidade", TRUE)` dos casos confirmados configurando óbitos, seguido de `r retira_valor(classificacao, "rank_letalidade", 2, "estado")` (`r retira_valor(classificacao, "rank_letalidade", "2", "letalidade", TRUE)`) e do `r retira_valor(classificacao, "rank_letalidade", 3, "estado")` (`r retira_valor(classificacao, "rank_letalidade", "3", "letalidade", TRUE)`).
