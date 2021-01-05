@@ -1,7 +1,4 @@
 # Carregando pacotes
-library(magrittr)
-library(httr)
-
 ## Esta parte do script funciona para carregar todos os pacotes necessarios para criação do boletim
 library(magrittr)
 library(httr)
@@ -15,7 +12,7 @@ if (!is.element("codeplan.boletim", installed.packages()[,1])){
 }
 library("codeplan.boletim")
 
-# Obtendo dados
+# Obtendo dados do ministerio da saude
 link <- GET("https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral",
             add_headers("X-Parse-Application-Id" = 
                           "unAFkcaNDeXajurGB7LChj8SgQYS2ptm")) %>%
