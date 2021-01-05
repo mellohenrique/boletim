@@ -1,4 +1,7 @@
 # Carregando pacotes
+library(magrittr)
+library(httr)
+
 ## Esta parte do script funciona para carregar todos os pacotes necessarios para criação do boletim
 
 ### Pacotes de terceiros
@@ -11,6 +14,7 @@ use_package <- function(p) {
 use_package("readr")
 use_package("readxl")
 use_package("devtools")
+
 
 ### Pacote do boletim
 if (!is.element("codeplan.boletim", installed.packages()[,1])){
@@ -34,6 +38,6 @@ write_excel_csv2(data.table::fread(link, sep = ";", dec = ","), "dados/min_saude
 # Gerando boletim
 gera_boletim(arquivo = "dados/min_saude.csv")
 
-gera_boletim_ra(arquivo = "dados/2020-12-28-cadastro.csv")
+gera_boletim_ra(arquivo = "dados/2021-01-04-cadastro.csv")
 
 # Remova os arquivos baixados posteriormente para não pesar no servidor. 
