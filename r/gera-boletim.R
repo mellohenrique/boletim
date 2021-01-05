@@ -1,9 +1,13 @@
 # Carregando pacotes
+library(magrittr)
+library(httr)
+
 ## Esta parte do script funciona para carregar todos os pacotes necessarios para criação do boletim
 library(magrittr)
 library(httr)
 library(readr)
 library(devtools)
+
 
 ### Pacote do boletim
 if (!is.element("codeplan.boletim", installed.packages()[,1])){
